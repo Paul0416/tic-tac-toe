@@ -2,20 +2,20 @@
 board = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 
 ##Define all possible combinations to win (constant)
-winCombinations =[[1,2,3], [4,5,6], [7,8,9], [1,5,9], [3,5,7], [1,4,7], [2,5,8], [3,6,9]]
+winCombinations = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 5, 9], [3, 5, 7], [1, 4, 7], [2, 5, 8], [3, 6, 9]]
 
 ##Set up array for player inputs (in int) and one for counting the matches
-playerInput =[[],[]]
-matchCount=[0,0]
+playerInput = [[], []]
+matchCount = [0, 0]
 turns = 1
 stop = False
 
-##Display inital board
+##Display initial board
 for row in board:
     print(row, "\n")
-    
+
 while stop == False:
-    ##Prevent numbers above 9 to be entered
+    ##Prevent numbers higher than 9 to be entered
     while True:
         try:
             position = int(input("Welk nummer kies je? \n"))
@@ -30,12 +30,12 @@ while stop == False:
         playerNicename = "O"
     else:
         playerNicename = "X"
-        
+
     ##Updating and displaying the board
     for row in board:
         for i in row:
             if position == i:
-                ##Find where the number from the input is^^^^^^^             
+                ##Find where the number from the input is^^^^^^^
                 if player == 0:
                     letter = "O"
                     ##Update the input array of player O (turns % 2 == 0)
@@ -44,10 +44,11 @@ while stop == False:
                     letter = "X"
                     ##Update the input array of player X (turns % 2 == 1)
                     playerInput[1].append(position)
-                    
+
                 ##Update the board
-                row.pop((position-1) % 3)
-                row.insert((position-1) % 3, letter)
+                row.pop((position - 1) % 3)
+                row.insert((position - 1) % 3, letter)
+        ## Print the board
         print(row, "\n")
     for combination in winCombinations:
         for i in playerInput[player]:
@@ -57,7 +58,7 @@ while stop == False:
         if matchCount[player] == 3:
             print("\n", playerNicename, "heeft gewonnen!")
             stop = True
-            ## A player wins if they have managed to obtain a winning combination
+            ## A player wins if they have managed to obtain (at least one) winning combination
         matchCount[player] = 0
     if turns == 9:
         stop = True
@@ -65,4 +66,4 @@ while stop == False:
     turns += 1
 
 
-        
+
